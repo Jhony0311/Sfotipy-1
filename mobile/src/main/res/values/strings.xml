@@ -10,4 +10,8 @@
     <string name="none"></string>
 
 
+    <!-- Example Strings -->
+
+    <string name="example_time">02:45</string>
+
 </resources>
