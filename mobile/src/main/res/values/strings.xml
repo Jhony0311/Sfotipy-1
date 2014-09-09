@@ -3,10 +3,11 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- Main Strings -->
     <string name="app_name">Sfotipy</string>
     <string name="none"></string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>
