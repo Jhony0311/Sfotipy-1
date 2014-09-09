@@ -1,0 +1,57 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="fragments.Fragment_Cover">
+
+    <customviews.SquareImageView
+        android:id="@+id/fragment_cover.image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/img_example"
+        android:layout_alignParentTop="true"/>
+
+    <RelativeLayout
+        android:id="@+id/fragment_cover.buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/black"
+        android:layout_alignBottom="@+id/fragment_cover.image">
+
+        <ImageButton
+            android:id="@+id/fragment_cover.share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_share"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="10dp"
+            android:contentDescription="@string/none"
+            android:alpha="0.8"/>
+
+        <ImageButton
+            android:id="@+id/fragment_cover.heart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_heart"
+            android:layout_margin="10dp"
+            android:contentDescription="@string/none"
+            android:layout_toLeftOf="@+id/fragment_cover.share"
+            android:layout_toStartOf="@+id/fragment_cover.share"
+            android:alpha="0.8"/>
+
+        <ImageButton
+            android:id="@+id/fragment_cover.add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_add"
+            android:layout_margin="10dp"
+            android:contentDescription="@string/none"
+            android:layout_toLeftOf="@+id/fragment_cover.heart"
+            android:layout_toStartOf="@+id/fragment_cover.heart"
+            android:alpha="0.8"/>
+
+        </RelativeLayout>
+
+</RelativeLayout>
