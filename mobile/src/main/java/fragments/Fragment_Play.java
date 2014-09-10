@@ -1,77 +1,153 @@
 package fragments;
 
 import android.app.Activity;
-import android.net.Uri;
+import android.graphics.Typeface;
+import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.mejorandola.sfotipy.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link Fragment_Play.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link Fragment_Play#newInstance} factory method to
- * create an instance of this fragment.
- *
- */
-public class Fragment_Play extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import java.util.ArrayList;
+import java.util.logging.Handler;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
+public class Fragment_Play extends Fragment implements MediaPlayer.OnCompletionListener, SeekBar.OnSeekBarChangeListener {
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Fragment_Play.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Fragment_Play newInstance(String param1, String param2) {
-        Fragment_Play fragment = new Fragment_Play();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-    public Fragment_Play() {
-        // Required empty public constructor
-    }
+    // The TAG for debugging
+    private static final String TAG = "Fragment_Play";
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    // The interface instance
+    private OnFragmentInteractionListener onFragmentInteractionListener;
+
+    // The ViewPage, its content and its adapter
+    private ViewPager viewPager;
+    private ArrayList<Fragment_Cover> songs;
+    private ViewPagerAdapter viewPagerAdapter;
+
+    // The seek layout views
+    private TextView time_passed;
+    private TextView time_remain;
+    private SeekBar seekBar;
+
+    // The title and the author
+    private TextView title;
+    private TextView author;
+
+    // The controls views
+    private ImageButton backward;
+    private ImageButton play;
+    private ImageButton forward;
+    private ImageButton random;
+    private ImageButton sound;
+
+    // The Media Player
+    private MediaPlayer mediaPlayer;
+
+    // Handler to update UI timer, progress bar etc,.
+    private Handler handler;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_play, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_play, container, false);
+
+        // The ViewPage, its content, adapter and its page listener
+        viewPager = (ViewPager) rootView.findViewById(R.id.fragment_play_viewpager);
+        songs = getExampleSongs();
+        viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
+        viewPager.setAdapter(viewPagerAdapter);
+        viewPager.setOnPageChangeListener(onPageChangeListener);
+
+        // The seek layout views
+        time_passed = (TextView) rootView.findViewById(R.id.fragment_play_time_passed);
+        time_remain = (TextView) rootView.findViewById(R.id.fragment_play_time_remain);
+        seekBar = (SeekBar) rootView.findViewById(R.id.fragment_play_seekbar);
+
+        // The title and the author
+        title = (TextView) rootView.findViewById(R.id.fragment_play_title);
+        author = (TextView) rootView.findViewById(R.id.fragment_play_author);
+
+        // The controls views
+        backward = (ImageButton) rootView.findViewById(R.id.fragment_play_backward);
+        play = (ImageButton) rootView.findViewById(R.id.fragment_play_play);
+        forward = (ImageButton) rootView.findViewById(R.id.fragment_play_forward);
+        random = (ImageButton) rootView.findViewById(R.id.fragment_play_random);
+        sound = (ImageButton) rootView.findViewById(R.id.fragment_play_sound);
+
+        // The Media Player
+        mediaPlayer = new MediaPlayer();
+
+        // Listeners
+        seekBar.setOnSeekBarChangeListener(this); // Important
+        mediaPlayer.setOnCompletionListener(this); // Important
+
+        // Set some fonts
+        Typeface font = Typeface.createFromAsset(getActivity().getAssets(),
+                "VarelaRound-Regular.ttf");
+        title.setTypeface(font);
+        author.setTypeface(font);
+
+        return rootView;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+    private ArrayList<Fragment_Cover> getExampleSongs() {
+
+        ArrayList<Fragment_Cover> exampleSongs = new ArrayList<Fragment_Cover>();
+
+        for (int i = 0; i < 5; i++) {
+            exampleSongs.add(new Fragment_Cover());
+        }
+
+        return exampleSongs;
+    }
+
+
+    private ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener() {
+
+        @Override
+        public void onPageScrollStateChanged(int arg0) {
+
+        }
+
+        @Override
+        public void onPageScrolled(int arg0, float arg1, int arg2) {
+
+        }
+
+        @Override
+        public void onPageSelected(int arg0) {
+
+        }
+    };
+
+    private class ViewPagerAdapter extends FragmentPagerAdapter {
+
+        public ViewPagerAdapter(FragmentManager fragmentManager) {
+            super(fragmentManager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+
+            return songs.get(position);
+
+        }
+
+        @Override
+        public int getCount() {
+            return songs.size();
         }
     }
 
@@ -79,7 +155,7 @@ public class Fragment_Play extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            mListener = (OnFragmentInteractionListener) activity;
+            onFragmentInteractionListener = (OnFragmentInteractionListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -89,7 +165,7 @@ public class Fragment_Play extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+        onFragmentInteractionListener = null;
     }
 
     /**
@@ -97,14 +173,40 @@ public class Fragment_Play extends Fragment {
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     * <p>
+     * <p/>
      * See the Android Training lesson <a href=
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
+        public void onFragmentPlayPlay(boolean isPlaying);
+
+        public void onFragmentPlayBackward();
+
+        public void onFragmentPlayForward();
+
+        public void onFragmentPlayRandom(boolean isRandom);
     }
 
+
+    // The necessary for the media player
+    @Override
+    public void onCompletion(MediaPlayer mp) {
+
+    }
+
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+    }
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+
+    }
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+
+    }
 }

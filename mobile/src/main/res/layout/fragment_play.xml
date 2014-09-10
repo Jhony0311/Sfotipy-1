@@ -7,21 +7,22 @@
               android:weightSum="2">
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/fragment_play.pager"
+        android:id="@+id/fragment_play.viewpager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.2"/>
+        android:layout_weight="1.3"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.8">
+        android:layout_weight="0.7">
 
         <RelativeLayout
             android:id="@+id/fragment_play.seek_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp">
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
 
             <TextView
                 android:id="@+id/fragment_play.time_passed"
@@ -36,7 +37,7 @@
                 android:padding="5dp"/>
 
             <SeekBar
-                android:id="@+id/fragmen_play.seekbar"
+                android:id="@+id/fragment_play.seekbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:progressDrawable="@drawable/scrubber_progress_horizontal"
@@ -63,10 +64,11 @@
 
 
         <LinearLayout
+            android:id="@+id/fragment_play.titleauthor"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/fragment_play.seek_layout"
-            android:layout_above="@+id/fragment_play.controls"
+            android:layout_above="@+id/fragment_cover.separator"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -93,13 +95,25 @@
         </LinearLayout>
 
 
+        <View
+            android:id="@+id/fragment_cover.separator"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_height="1dp"
+            android:background="@color/color_grey_light"
+            android:layout_above="@+id/fragment_play.controls"/>
+
         <LinearLayout
             android:id="@+id/fragment_play.controls"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            android:paddingBottom="5dp">
 
             <ImageButton
                 android:id="@+id/fragment_play.backward"
