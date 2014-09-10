@@ -1,24 +1,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="fragments.Fragment_Play"
-    android:orientation="vertical"
-    android:weightSum="2">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              tools:context="fragments.Fragment_Play"
+              android:orientation="vertical"
+              android:weightSum="2">
 
-    <!-- activity_screen_slide.xml -->
     <android.support.v4.view.ViewPager
         android:id="@+id/fragment_play.pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1.2"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="0.8">
 
         <RelativeLayout
+            android:id="@+id/fragment_play.seek_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="5dp">
@@ -59,7 +59,38 @@
                 android:layout_centerVertical="true"
                 android:padding="5dp"/>
 
-            </RelativeLayout>
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/fragment_play.seek_layout"
+            android:layout_above="@+id/fragment_play.controls"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/fragment_play.title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:gravity="center"
+                android:text="@string/example_title"
+                android:textSize="25sp"
+                android:padding="5dp"/>
+
+            <TextView
+                android:id="@+id/fragment_play.author"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_grey_dark"
+                android:gravity="center"
+                android:text="@string/example_author"
+                android:textSize="16sp"
+                android:padding="5dp"/>
+
+        </LinearLayout>
 
 
         <LinearLayout
@@ -67,12 +98,50 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="center">
 
+            <ImageButton
+                android:id="@+id/fragment_play.backward"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/none"
+                android:background="@drawable/selector_backward"
+                android:layout_margin="10dp"/>
 
-            </LinearLayout>
+            <ImageButton
+                android:id="@+id/fragment_play.play"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/none"
+                android:background="@drawable/selector_play"
+                android:layout_margin="10dp"/>
 
+            <ImageButton
+                android:id="@+id/fragment_play.forward"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/none"
+                android:background="@drawable/selector_forward"
+                android:layout_margin="10dp"/>
 
+            <ImageButton
+                android:id="@+id/fragment_play.random"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/none"
+                android:background="@drawable/selector_random"
+                android:layout_margin="10dp"/>
+
+            <ImageButton
+                android:id="@+id/fragment_play.sound"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/none"
+                android:background="@drawable/selector_sound"
+                android:layout_margin="10dp"/>
+
+        </LinearLayout>
     </RelativeLayout>
 
 </LinearLayout>

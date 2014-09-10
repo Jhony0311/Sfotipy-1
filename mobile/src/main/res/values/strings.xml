@@ -13,5 +13,7 @@
     <!-- Example Strings -->
 
     <string name="example_time">02:45</string>
+    <string name="example_title">Happy</string>
+    <string name="example_author">Pharrell Williams</string>
 
 </resources>
