@@ -49,7 +49,8 @@ public class Activity_Main extends FragmentActivity implements Fragment_Play.OnF
         // Open and Close the drawer with the App Icon
         drawerLayout = (DrawerLayout) findViewById(R.id.activity_main_drawerlayout);
         getActionBar().setDisplayHomeAsUpEnabled(true);
-        
+
+
         getActionBar().setTitle(getResources().getString(R.string.none));
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,
                 R.drawable.ic_drawer, R.string.none,
